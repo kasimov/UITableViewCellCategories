@@ -28,4 +28,40 @@
     return tableView;
 }
 
+-(NSArray *)findTextInputs
+{
+    NSMutableArray *cellTextInputs = [NSMutableArray array];
+    
+    NSArray *cellContentViews = self.contentView.subviews;
+    
+    for (id obj in cellContentViews)
+    {
+        if ([obj isKindOfClass:[UITextField class]] ||
+            [obj isKindOfClass:[UITextView class]])
+        {
+            //NSValue *value = [NSValue valueWithNonretainedObject:obj];
+            [cellTextInputs addObject:obj];
+        }
+    }
+    
+    return cellTextInputs;
+}
+
+@end
+
+
+@implementation UITableView (TextInputs)
+
+- (NSArray *)findTextInputs
+{
+    NSMutableArray *tableTextInputs = [NSMutableArray array];
+    
+    for (UITableViewCell *cell in [self visibleCells])
+    {
+        [tableTextInputs addObjectsFromArray:[cell findTextInputs]];
+    }
+    
+    return tableTextInputs;
+}
+
 @end

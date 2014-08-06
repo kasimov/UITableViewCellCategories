@@ -12,4 +12,12 @@
 
 - (UITableView *)tableView;
 
+- (NSArray *)findTextInputs;
+
+@end
+
+
+@interface UITableView (TextInputs)
+- (NSArray *)findTextInputs;
+
 @end
